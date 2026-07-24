@@ -1,0 +1,29 @@
+# Logs
+logs/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Editors
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Cache
+.cache/
+tmp/
+
+# Build
+dist/
+build/

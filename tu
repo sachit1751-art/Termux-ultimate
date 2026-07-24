@@ -24,29 +24,48 @@ EOF
 }
 
 case "$1" in
+
   version)
     echo "$VERSION"
     ;;
+
   doctor)
     bash "$ROOT/modules/doctor.sh"
     ;;
+
   repair)
     bash "$ROOT/modules/repair.sh"
     ;;
+
   update)
     bash "$ROOT/modules/update.sh"
     ;;
+
   install)
     case "$2" in
-      shell) bash "$ROOT/modules/shell.sh" ;;
-      python) bash "$ROOT/modules/python.sh" ;;
-      node) bash "$ROOT/modules/node.sh" ;;
-      ai) bash "$ROOT/modules/ai.sh" ;;
-      media) bash "$ROOT/modules/media.sh" ;;
-      *) show_help ;;
+      shell)
+        bash "$ROOT/modules/shell.sh"
+        ;;
+      python)
+        bash "$ROOT/modules/python.sh"
+        ;;
+      node)
+        bash "$ROOT/modules/node.sh"
+        ;;
+      ai)
+        bash "$ROOT/modules/ai.sh"
+        ;;
+      media)
+        bash "$ROOT/modules/media.sh"
+        ;;
+      *)
+        show_help
+        ;;
     esac
     ;;
+
   *)
     show_help
     ;;
+
 esac

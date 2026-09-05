@@ -100,7 +100,7 @@ fi
 theme() {
     local name="${1:-}"
     case "$name" in
-        catppuccin|tokyonight)
+        catppuccin|tokyonight|dracula)
             cp "$HOME/.termux-ultimate/themes/$name.properties" "$HOME/.termux/colors.properties"
             command -v termux-reload-settings >/dev/null 2>&1 && termux-reload-settings
             echo "Theme set to $name."
@@ -116,7 +116,7 @@ theme() {
             fi
             ;;
         *)
-            echo "Usage: theme catppuccin | tokyonight | default"
+            echo "Usage: theme catppuccin | tokyonight | dracula | default"
             ;;
     esac
 }

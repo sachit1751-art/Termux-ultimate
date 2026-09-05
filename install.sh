@@ -124,6 +124,15 @@ else
     warn "Could not add 'tu' to PATH - use $INSTALL_DIR/tu"
 fi
 
+# Request storage access (Android permission dialog on first run)
+if command -v termux-setup-storage >/dev/null 2>&1; then
+    if termux-setup-storage >/dev/null 2>&1; then
+        success "Storage access granted"
+    else
+        warn "Storage access not granted - you can run termux-setup-storage later"
+    fi
+fi
+
 # --- Module selection -------------------------------------------------------
 
 selected=""

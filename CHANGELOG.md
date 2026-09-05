@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Dracula theme (`theme dracula`)
+- `tu logs` to view the install log
+- Uninstall confirmation prompt (full uninstall requires typing `yes`)
+- `uv` (fast Python package/venv manager) in the python module
+- Storage access setup (`termux-setup-storage`) in the installer
+- More git aliases: `gd`, `gpf`, `gundo`, `gclean`
+
 ## v0.1.0 — 2026-09-05
 
 First stable release. The complete roadmap from the README is implemented.

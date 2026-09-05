@@ -36,7 +36,7 @@ Check the box when it passes.
 
 - [ ] `zsh` starts with the figlet greeting, then fastfetch with themed colors.
 - [ ] `theme tokyonight` switches colors (run `termux-reload-settings` hint appears),
-      `theme catppuccin` switches back.
+      `theme dracula` switches again, `theme catppuccin` switches back.
 - [ ] `ls` is eza-style (colors, directories first), `cat` is bat, `grep` is rg,
       `find` is fd.
 - [ ] `tu <TAB>` completes commands; `tu install <TAB>` completes modules.

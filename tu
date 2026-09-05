@@ -30,6 +30,7 @@ Usage:
   ./tu uninstall [module]    Remove the setup (or one module)
   ./tu backup                Back up your dotfiles
   ./tu restore <file>        Restore from a backup
+  ./tu logs                  View the install log
   ./tu version               Show version
 
 Modules:
@@ -45,6 +46,16 @@ run_doctor()    { bash "$ROOT/modules/doctor.sh"; }
 run_repair()    { bash "$ROOT/modules/repair.sh"; }
 run_update()    { bash "$ROOT/modules/update.sh"; }
 run_uninstall() { bash "$ROOT/uninstall.sh"; }
+
+show_logs() {
+    local log_file="$HOME/.termux-ultimate/logs/install.log"
+    if [ -f "$log_file" ]; then
+        echo "=== $log_file (last 50 lines) ==="
+        tail -n 50 "$log_file"
+    else
+        echo "No install log found yet - run 'tu install <module>' first."
+    fi
+}
 
 install_module() {
     local mod="$1"
@@ -111,7 +122,8 @@ menu() {
         echo "  4) Update    - pull the latest version"
         echo "  5) Uninstall - remove the setup"
         echo "  6) Backup    - save your dotfiles"
-        echo "  7) Version"
+        echo "  7) Logs      - view the install log"
+        echo "  8) Version"
         echo "  0) Exit"
         echo
         read -rp "> " choice
@@ -123,7 +135,8 @@ menu() {
             4) run_update ;;
             5) run_uninstall; break ;;
             6) bash "$ROOT/modules/backup.sh" backup ;;
-            7) echo "Termux Ultimate v$VERSION" ;;
+            7) show_logs ;;
+            8) echo "Termux Ultimate v$VERSION" ;;
             0 | "") break ;;
             *) echo "Invalid choice." ;;
         esac
@@ -169,6 +182,10 @@ case "$1" in
 
     backup | restore)
         bash "$ROOT/modules/backup.sh" "$1" "${2:-}"
+        ;;
+
+    logs)
+        show_logs
         ;;
 
     install)

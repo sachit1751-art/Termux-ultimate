@@ -69,6 +69,7 @@ echo "Python module:"
 check "python" "python"
 check "pip" "pip"
 check "ipython" "ipython"
+check "uv" "uv"
 
 echo
 echo "Node module:"

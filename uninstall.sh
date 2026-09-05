@@ -15,6 +15,21 @@ echo " Termux Ultimate Uninstaller"
 echo "================================="
 echo
 
+# Full uninstall is destructive - require confirmation
+if [ -t 0 ]; then
+    read -rp "This removes the setup and restores your configs. Type 'yes' to continue: " confirm
+    if [ "$confirm" != "yes" ]; then
+        echo "Cancelled."
+        exit 1
+    fi
+else
+    echo "Not a terminal - refusing to uninstall without confirmation."
+    echo "Run it interactively: tu uninstall"
+    exit 1
+fi
+
+echo
+
 ZSHRC="$HOME/.zshrc"
 BACKUP="$HOME/.zshrc.termux-ultimate-backup"
 

@@ -21,5 +21,9 @@ git config --global alias.unstage 'reset HEAD --'
 git config --global alias.last 'log -1 HEAD'
 git config --global alias.lg 'log --oneline --graph --decorate -20'
 git config --global alias.amend 'commit --amend'
+git config --global alias.gd diff
+git config --global alias.gpf 'push --force-with-lease'
+git config --global alias.gundo 'reset --soft HEAD~1'
+git config --global alias.gclean 'clean -fd'
 
-echo "✓ git configured (try: git lg, git st)"
+echo "✓ git configured (try: git lg, git st, git gpf)"

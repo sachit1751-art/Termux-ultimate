@@ -11,7 +11,7 @@
 ## Features
 
 - 🐚 Oh My Zsh + Powerlevel10k + zsh-autosuggestions + zsh-syntax-highlighting
-- 🎨 Catppuccin & Tokyo Night themes (`theme catppuccin|tokyonight|default`)
+- 🎨 Catppuccin, Tokyo Night & Dracula themes (`theme catppuccin|tokyonight|dracula|default`)
 - 🖥️ tmux with a ready-made config
 - ⚙️ Git aliases and sane defaults
 - 📈 btop / htop
@@ -57,7 +57,7 @@ Type `all` for everything, `none` (or just press Enter) to skip. Everything is l
 curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/install.sh | bash -s shell python ai
 ```
 
-Running the installer again updates an existing install in place (no duplicate clone).
+Running the installer again updates an existing install in place (no duplicate clone). It also requests storage access via `termux-setup-storage` so downloads and projects can live in shared folders.
 
 ## Usage
 
@@ -72,6 +72,7 @@ tu uninstall        # Remove the setup
 tu uninstall shell  # ...or just one module
 tu backup           # Back up your dotfiles
 tu restore <file>   # Restore from a backup
+tu logs             # View the install log
 tu version          # Show the current version
 
 tu install          # Module picker (interactive)

@@ -16,7 +16,7 @@ if [ -z "$PREFIX" ]; then
     exit 1
 fi
 
-echo "[1/2] Installing Python..."
+echo "[1/3] Installing Python..."
 
 if ! command -v python >/dev/null 2>&1; then
     pkg install python -y
@@ -24,7 +24,7 @@ else
     echo "✓ python already installed"
 fi
 
-echo "[2/2] Setting up pip and dev tools..."
+echo "[2/3] Setting up pip and dev tools..."
 
 if command -v pip >/dev/null 2>&1; then
     pip install --upgrade pip
@@ -38,9 +38,20 @@ else
     echo "✓ ipython already installed"
 fi
 
+echo "[3/3] Installing uv (fast package & venv manager)..."
+
+if ! command -v uv >/dev/null 2>&1; then
+    pip install uv
+else
+    echo "✓ uv already installed"
+fi
+
 echo
 echo "✓ Python setup completed"
 echo "  python:  $(python --version 2>&1)"
 echo "  pip:     $(pip --version 2>&1 | cut -d' ' -f1-2)"
 echo "  ipython: $(command -v ipython >/dev/null 2>&1 && echo installed || echo 'not found')"
+echo "  uv:      $(command -v uv >/dev/null 2>&1 && uv --version 2>&1 || echo 'not found')"
 echo "  elapsed: $(($(date +%s) - START))s"
+echo
+echo "Try it: python, ipython, uv"

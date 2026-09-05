@@ -12,6 +12,8 @@ echo " Termux Ultimate Updater"
 echo "================================="
 echo
 
+START=$(date +%s)
+
 if [ ! -d "$ROOT/.git" ]; then
     echo "Error: this copy of Termux Ultimate is not a git repository."
     echo "Reinstall with the one-command installer instead:"
@@ -29,4 +31,5 @@ else
 fi
 
 echo
-echo "Run './tu doctor' to check your setup and './tu repair' to reinstall anything missing."
+echo "Run './tu doctor' to check your setup and './tu repair' to reinstall anything missing."
+echo "Completed in $(($(date +%s) - START))s"

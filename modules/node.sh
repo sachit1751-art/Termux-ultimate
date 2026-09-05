@@ -9,6 +9,8 @@ echo "================================="
 echo " Termux Ultimate Node Installer"
 echo "================================="
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -38,4 +40,8 @@ fi
 
 echo
 echo "✓ Node setup completed"
-echo "Try it: node -v, pnpm -v, yarn -v"
+echo "  node:  $(node -v 2>&1)"
+echo "  npm:   $(npm -v 2>&1)"
+echo "  pnpm:  $(pnpm -v 2>&1)"
+echo "  yarn:  $(yarn -v 2>&1)"
+echo "  elapsed: $(($(date +%s) - START))s"

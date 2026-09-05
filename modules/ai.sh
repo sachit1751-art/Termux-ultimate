@@ -9,6 +9,8 @@ echo "================================="
 echo " Termux Ultimate AI Installer"
 echo "================================="
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -41,6 +43,10 @@ fi
 
 echo
 echo "✓ AI setup completed"
+echo "  ollama: $(command -v ollama >/dev/null 2>&1 && ollama --version 2>&1 || echo 'not found')"
+echo "  gemini: $(command -v gemini >/dev/null 2>&1 && echo installed || echo 'not found')"
+echo "  elapsed: $(($(date +%s) - START))s"
+echo
 echo "Run local models:    ollama run <model>  (e.g. llama3.2)"
 echo "Use Gemini CLI:      gemini"
 echo "Note: Gemini CLI needs a Google API key on first run."

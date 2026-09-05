@@ -9,6 +9,8 @@ echo "================================="
 echo " Termux Ultimate Media Installer"
 echo "================================="
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -32,5 +34,9 @@ fi
 
 echo
 echo "✓ Media setup completed"
+echo "  yt-dlp: $(yt-dlp --version 2>&1)"
+echo "  ffmpeg: $(ffmpeg -version 2>&1 | head -1)"
+echo "  elapsed: $(($(date +%s) - START))s"
+echo
 echo "Download a video:    yt-dlp <url>"
 echo "Convert a file:      ffmpeg -i input.mp4 output.mp3"

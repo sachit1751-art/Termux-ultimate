@@ -20,6 +20,8 @@ echo " Termux Ultimate Doctor"
 echo "================================="
 echo
 
+START=$(date +%s)
+
 echo "Environment:"
 if [ -n "$PREFIX" ]; then
     echo "  [OK] Termux detected (PREFIX=$PREFIX)"
@@ -75,5 +77,7 @@ if [ "$FAILURES" -eq 0 ]; then
 else
     echo "! $FAILURES item(s) missing - run ./tu repair to fix"
 fi
+
+echo "Completed in $(($(date +%s) - START))s"
 
 exit 0

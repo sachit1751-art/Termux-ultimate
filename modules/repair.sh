@@ -12,6 +12,8 @@ echo " Termux Ultimate Repair"
 echo "================================="
 echo
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -59,4 +61,6 @@ fi
 
 echo
 echo "✓ Repair completed"
+echo "  elapsed: $(($(date +%s) - START))s"
+echo
 echo "Run './tu doctor' to verify everything."

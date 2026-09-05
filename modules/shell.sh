@@ -11,6 +11,8 @@ echo "================================="
 echo " Termux Ultimate Shell Installer"
 echo "================================="
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -24,4 +26,10 @@ bash "$MODULE_DIR/git.sh"
 
 echo
 echo "✓ Shell setup completed"
+echo "  zsh + Oh My Zsh + Powerlevel10k"
+echo "  plugins: zsh-autosuggestions, zsh-syntax-highlighting"
+echo "  theme: Catppuccin (switch with 'theme tokyonight')"
+echo "  tmux config + git config + btop/htop"
+echo "  elapsed: $(($(date +%s) - START))s"
+echo
 echo "Restart Termux or run: zsh"

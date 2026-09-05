@@ -9,6 +9,8 @@ echo "================================="
 echo " Termux Ultimate Python Installer"
 echo "================================="
 
+START=$(date +%s)
+
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
     exit 1
@@ -38,4 +40,7 @@ fi
 
 echo
 echo "✓ Python setup completed"
-echo "Try it: python, ipython, pip"
+echo "  python:  $(python --version 2>&1)"
+echo "  pip:     $(pip --version 2>&1 | cut -d' ' -f1-2)"
+echo "  ipython: $(command -v ipython >/dev/null 2>&1 && echo installed || echo 'not found')"
+echo "  elapsed: $(($(date +%s) - START))s"

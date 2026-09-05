@@ -1,32 +1,33 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-VERSION="0.1.0-alpha"
 ROOT="$(cd "$(dirname "$0")" && pwd)"
+VERSION="$(cat "$ROOT/VERSION" 2>/dev/null || echo "unknown")"
 
 show_help() {
 cat << EOF
-Termux Ultimate
+Termux Ultimate v$VERSION
 
 Usage:
-  ./tu install <module>
-  ./tu doctor
-  ./tu repair
-  ./tu update
-  ./tu version
+  ./tu install <module>   Install a module
+  ./tu doctor             Check your setup health
+  ./tu repair             Reinstall anything that is missing
+  ./tu update             Pull the latest version
+  ./tu uninstall          Remove Termux Ultimate setup
+  ./tu version            Show version
 
 Modules:
-  shell
-  python
-  node
-  ai
-  media
+  shell    Zsh + Oh My Zsh + Powerlevel10k
+  python   Python development environment
+  node     Node.js, pnpm, Yarn
+  ai       Ollama + Gemini CLI
+  media    yt-dlp + FFmpeg
 EOF
 }
 
 case "$1" in
 
   version)
-    echo "$VERSION"
+    echo "Termux Ultimate v$VERSION"
     ;;
 
   doctor)
@@ -39,6 +40,10 @@ case "$1" in
 
   update)
     bash "$ROOT/modules/update.sh"
+    ;;
+
+  uninstall)
+    bash "$ROOT/uninstall.sh"
     ;;
 
   install)
@@ -68,4 +73,4 @@ case "$1" in
     show_help
     ;;
 
-esac
+esac

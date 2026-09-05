@@ -1,6 +1,7 @@
 # Logs
 logs/
 *.log
+activity_log.txt
 
 # Python
 __pycache__/

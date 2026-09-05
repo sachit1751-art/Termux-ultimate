@@ -17,6 +17,8 @@ vim
 openssh
 figlet
 neofetch
+fastfetch
+tmux
 "
 
 echo "[2/3] Installing packages..."

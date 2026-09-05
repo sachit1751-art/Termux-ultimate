@@ -19,6 +19,8 @@ fi
 bash "$MODULE_DIR/install.sh"
 bash "$MODULE_DIR/plugins.sh"
 bash "$MODULE_DIR/config.sh"
+bash "$MODULE_DIR/tmux.sh"
+bash "$MODULE_DIR/git.sh"
 
 echo
 echo "✓ Shell setup completed"

@@ -19,6 +19,8 @@ figlet
 neofetch
 fastfetch
 tmux
+btop
+htop
 "
 
 echo "[2/3] Installing packages..."

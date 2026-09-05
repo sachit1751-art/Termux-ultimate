@@ -28,6 +28,11 @@ else
     echo "• Left your .zshrc untouched (no Termux Ultimate backup found)"
 fi
 
+if [ -f "$HOME/.tmux.conf.termux-ultimate-backup" ]; then
+    mv "$HOME/.tmux.conf.termux-ultimate-backup" "$HOME/.tmux.conf"
+    echo "✓ Restored your original .tmux.conf"
+fi
+
 if [ -d "$HOME/.oh-my-zsh" ]; then
     rm -rf "$HOME/.oh-my-zsh"
     echo "✓ Removed Oh My Zsh"

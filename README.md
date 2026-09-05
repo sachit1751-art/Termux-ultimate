@@ -11,6 +11,10 @@
 ## Features
 
 - 🐚 Oh My Zsh + Powerlevel10k + zsh-autosuggestions + zsh-syntax-highlighting
+- 🎨 Catppuccin & Tokyo Night themes (`theme catppuccin|tokyonight|default`)
+- 🖥️ tmux with a ready-made config
+- ⚙️ Git aliases and sane defaults
+- 📈 btop / htop
 - 🤖 Ollama (local LLMs)
 - 🧠 Gemini CLI
 - 🐍 Python Development (pip, IPython)

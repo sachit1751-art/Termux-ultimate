@@ -32,6 +32,7 @@ echo "  plugins: zsh-autosuggestions, zsh-syntax-highlighting"
 echo "  theme: Catppuccin (switch with 'theme tokyonight')"
 echo "  tmux config + git config + fastfetch"
 echo "  dev tools: eza, bat, fd, ripgrep, jq, tldr + btop/htop"
+echo "  termux-api: clipboard, wake-lock, open links"
 echo "  elapsed: $(($(date +%s) - START))s"
 echo
 echo "Restart Termux or run: zsh"

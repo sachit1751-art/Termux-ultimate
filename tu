@@ -13,7 +13,7 @@ done
 ROOT="$(cd -P "$(dirname "$SCRIPT")" && pwd)"
 VERSION="$(cat "$ROOT/VERSION" 2>/dev/null || echo "unknown")"
 
-MODULES="shell python node ai media"
+MODULES="shell python node ai media lazygit lang"
 
 show_help() {
 cat << EOF
@@ -27,6 +27,7 @@ Usage:
   ./tu doctor                Check your setup health
   ./tu repair                Reinstall anything that is missing
   ./tu update                Pull the latest version
+  ./tu upgrade               Update + repair in one step
   ./tu uninstall [module]    Remove the setup (or one module)
   ./tu backup                Back up your dotfiles
   ./tu restore <file>        Restore from a backup
@@ -40,6 +41,8 @@ Modules:
   node     Node.js, pnpm, Yarn
   ai       Ollama + Gemini CLI
   media    yt-dlp + FFmpeg
+  lazygit  Terminal UI for git
+  lang     Rust + Go toolchains
 EOF
 }
 
@@ -47,6 +50,7 @@ run_doctor()    { bash "$ROOT/modules/doctor.sh"; }
 run_repair()    { bash "$ROOT/modules/repair.sh"; }
 run_update()    { bash "$ROOT/modules/update.sh"; }
 run_uninstall() { bash "$ROOT/uninstall.sh"; }
+run_upgrade()   { bash "$ROOT/modules/update.sh" && bash "$ROOT/modules/repair.sh"; }
 
 show_logs() {
     local log_file="$HOME/.termux-ultimate/logs/install.log"
@@ -65,6 +69,8 @@ describe_module() {
         node)   echo "Node.js + npm + pnpm + Yarn" ;;
         ai)     echo "Ollama + Gemini CLI" ;;
         media)  echo "yt-dlp + FFmpeg" ;;
+        lazygit) echo "Lazygit - terminal UI for git" ;;
+        lang)   echo "Rust + Go toolchains" ;;
     esac
 }
 
@@ -108,7 +114,7 @@ pick_module() {
                         echo "Invalid choice."
                         ;;
                     *)
-                        if [ "$choice" -ge 1 ] && [ "$choice" -le 5 ]; then
+                        if [ "$choice" -ge 1 ] && [ "$choice" -le 7 ]; then
                             install_module "$(echo "$MODULES" | cut -d' ' -f"$choice")"
                         else
                             echo "Invalid choice."
@@ -130,7 +136,7 @@ menu() {
         echo "  1) Doctor    - check your setup"
         echo "  2) Repair    - fix missing components"
         echo "  3) Install   - add a module"
-        echo "  4) Update    - pull the latest version"
+        echo "  4) Upgrade   - update + repair in one step"
         echo "  5) Uninstall - remove the setup"
         echo "  6) Backup    - save your dotfiles"
         echo "  7) Logs      - view the install log"
@@ -143,7 +149,7 @@ menu() {
             1) run_doctor ;;
             2) run_repair ;;
             3) pick_module ;;
-            4) run_update ;;
+            4) run_upgrade ;;
             5) run_uninstall; break ;;
             6) bash "$ROOT/modules/backup.sh" backup ;;
             7) show_logs ;;
@@ -181,6 +187,10 @@ case "$1" in
 
     update)
         run_update
+        ;;
+
+    upgrade)
+        run_upgrade
         ;;
 
     uninstall)

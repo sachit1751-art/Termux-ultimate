@@ -8,9 +8,9 @@ INSTALL_DIR="$HOME/.termux-ultimate"
 LOG_DIR="$INSTALL_DIR/logs"
 LOG_FILE="$LOG_DIR/install.log"
 
-VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo "0.1.1")"
+VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo "0.1.3")"
 
-MODULES="shell python node ai media"
+MODULES="shell python node ai media lazygit lang"
 
 describe_module() {
     case "$1" in
@@ -19,6 +19,8 @@ describe_module() {
         node)   echo "Node.js + npm + pnpm + Yarn" ;;
         ai)     echo "Ollama + Gemini CLI" ;;
         media)  echo "yt-dlp + FFmpeg" ;;
+        lazygit) echo "Lazygit - terminal UI for git" ;;
+        lang)   echo "Rust + Go toolchains" ;;
     esac
 }
 
@@ -192,7 +194,7 @@ elif [ -t 0 ]; then
                     valid=0
                     ;;
                 *)
-                    if [ "$part" -ge 1 ] && [ "$part" -le 5 ]; then
+                    if [ "$part" -ge 1 ] && [ "$part" -le 7 ]; then
                         mod="$(echo "$MODULES" | cut -d' ' -f"$part")"
                         case " $new_selected " in
                             *" $mod "*) ;;

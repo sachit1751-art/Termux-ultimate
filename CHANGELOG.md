@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.1.3 — 2026-09-05
+
+### Added
+- `tu upgrade` — update + repair in one step (also in the menu)
+- **lazygit** module — terminal UI for git (`tu install lazygit`)
+- **lang** module — Rust + Go toolchains (`tu install lang`)
+- `termux-api` support in the shell module (clipboard, wake-lock, `open` alias)
+- README banner (`assets/banner.svg`) and `RELEASES.md` with ready-to-paste notes
+
+### Fixed
+- Module picker range (1–7) for the two new modules
+
 ## v0.1.2 — 2026-09-05
 
 ### Added

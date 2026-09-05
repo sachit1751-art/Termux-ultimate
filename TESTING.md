@@ -28,6 +28,8 @@ Check the box when it passes.
 
 - [ ] `tu install ai` installs Ollama and Gemini CLI.
 - [ ] `tu install media` installs yt-dlp and FFmpeg.
+- [ ] `tu install lazygit` installs the lazygit TUI (`lazygit` opens in a git repo).
+- [ ] `tu install lang` installs Rust and Go (`rustc --version` and `go version` work).
 - [ ] `tu uninstall media` removes them again (`tu doctor` no longer lists yt-dlp/ffmpeg).
 - [ ] `tu install` (no module) opens the module picker; pick `all` — everything
       installs.
@@ -46,6 +48,7 @@ Check the box when it passes.
 ## 5. Self-update / repair
 
 - [ ] `tu update` pulls latest changes and reports the new version.
+- [ ] `tu upgrade` updates AND repairs in one step.
 - [ ] Remove something manually (e.g. `pkg uninstall fastfetch`) then
       `tu repair` — it reinstalls the missing piece.
 - [ ] `tu doctor` reports `[UPDATE]` when the remote version is newer than local.

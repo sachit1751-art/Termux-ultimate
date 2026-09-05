@@ -1,8 +1,10 @@
 # 🚀 Termux Ultimate
 
+![Termux Ultimate](assets/banner.svg)
+
 > Transform Termux into a modern AI-powered development environment with a single command.
 
-![Version](https://img.shields.io/badge/version-0.1.2-blue)
+![Version](https://img.shields.io/badge/version-0.1.3-blue)
 ![Platform](https://img.shields.io/badge/platform-Termux-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -19,8 +21,11 @@
 - 📊 Fastfetch with a theme-aware config
 - 🤖 Ollama (local LLMs)
 - 🧠 Gemini CLI
-- 🐍 Python Development (pip, IPython)
+- 🐍 Python Development (pip, IPython, uv)
 - 🟢 Node.js Development (npm, pnpm, Yarn)
+- 🦀 Rust + Go toolchains
+- ⚡ Lazygit — terminal UI for git
+- 📲 termux-api (clipboard, wake-lock, open links)
 - 🎥 yt-dlp + FFmpeg
 - 🩺 `tu doctor` — health checks + update check
 - 🛠 `tu repair` — self repair
@@ -81,6 +86,11 @@ tu install python   # Python, pip, IPython
 tu install node     # Node.js, pnpm, Yarn
 tu install ai       # Ollama + Gemini CLI
 tu install media    # yt-dlp + FFmpeg
+tu install lazygit  # Terminal UI for git
+tu install lang     # Rust + Go toolchains
+
+tu update   # Pull the latest version
+tu upgrade  # Update + repair in one step
 ```
 
 Running `tu` with no arguments opens a friendly menu — pick an action with a number, install multiple modules, and press `0` to exit. Every module is idempotent — safe to run multiple times; already-installed tools are skipped.
@@ -95,9 +105,9 @@ Nice extras:
 
 ## Project Status
 
-✅ First stable release (v0.1.0) + maintenance releases (v0.1.1, v0.1.2)
+✅ First stable release (v0.1.0) + maintenance releases (v0.1.1–v0.1.3)
 
-Current Version: **0.1.2**
+Current Version: **0.1.3**
 
 ---
 

@@ -49,9 +49,10 @@ desktop Linux, Windows, or macOS.
 - `VERSION` — single source of truth for the version (read by `tu`;
   `install.sh` fetches it from GitHub raw).
 - `modules/` — one script per install module: `shell.sh` (orchestrates the
-  steps in `modules/shell/`), `python.sh`, `node.sh`, `ai.sh`, `media.sh` —
-  plus tooling: `doctor.sh` (health + update check), `repair.sh`,
-  `update.sh`, `backup.sh`, `uninstall.sh` (per-module).
+  steps in `modules/shell/`), `python.sh`, `node.sh`, `ai.sh`, `media.sh`,
+  `lazygit.sh`, `lang.sh` — plus tooling: `doctor.sh` (health + update
+  check), `repair.sh`, `update.sh`, `backup.sh`, `uninstall.sh`
+  (per-module).
 - `modules/shell/` — steps: `install.sh` (package list), `plugins.sh`,
   `config.sh` (`.zshrc`: aliases, greeting, theme switcher, `tu` completion),
   `fastfetch.sh`, `tmux.sh`, `git.sh`, `themes/*.properties` (Termux color
@@ -65,7 +66,9 @@ desktop Linux, Windows, or macOS.
 1. Create `modules/<name>.sh` following the pattern: banner, `START=$(date +%s)`,
    PREFIX guard, idempotent install steps, summary with versions + elapsed time.
 2. Add it to the `MODULES` list in `tu` and `install.sh`, plus a
-   `describe_module` case in both.
+   `describe_module` case in both, and update the numeric range checks
+   (`-le N` in `pick_module` and the installer prompt) to match the new
+   module count.
 3. Add `check "<name>" "<binary>"` to `modules/doctor.sh`, a repair branch in
    `modules/repair.sh`, and an uninstall branch in `modules/uninstall.sh`.
 4. Update `show_help` in `tu`, the README feature list, `CHANGELOG.md`, and

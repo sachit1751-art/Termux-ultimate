@@ -27,6 +27,7 @@ fd
 ripgrep
 jq
 tldr
+termux-api
 "
 
 echo "[2/3] Installing packages..."

@@ -72,6 +72,7 @@ check "fd" "fd" "tu install shell"
 check "ripgrep (rg)" "rg" "tu install shell"
 check "jq" "jq" "tu install shell"
 check "tldr" "tldr" "tu install shell"
+check "termux-api" "termux-api" "tu install shell"
 
 echo
 echo "Python module:"
@@ -96,6 +97,16 @@ echo
 echo "Media module:"
 check "yt-dlp" "yt-dlp" "tu install media"
 check "ffmpeg" "ffmpeg" "tu install media"
+
+echo
+echo "Lazygit module:"
+check "lazygit" "lazygit" "tu install lazygit"
+
+echo
+echo "Lang module:"
+check "rustc" "rustc" "tu install lang"
+check "cargo" "cargo" "tu install lang"
+check "go" "go" "tu install lang"
 
 echo
 if [ "$FAILURES" -eq 0 ]; then

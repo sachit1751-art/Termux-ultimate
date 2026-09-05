@@ -59,6 +59,20 @@ else
     echo "✓ Media tools OK"
 fi
 
+if missing lazygit; then
+    echo "! Lazygit missing, reinstalling..."
+    bash "$ROOT/modules/lazygit.sh"
+else
+    echo "✓ Lazygit OK"
+fi
+
+if missing rustc || missing go; then
+    echo "! Language toolchains missing, reinstalling..."
+    bash "$ROOT/modules/lang.sh"
+else
+    echo "✓ Lang toolchains OK"
+fi
+
 echo
 echo "✓ Repair completed"
 echo "  elapsed: $(($(date +%s) - START))s"

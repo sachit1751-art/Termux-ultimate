@@ -15,7 +15,7 @@ fi
 
 if [ -z "$MODULE" ]; then
     echo "Usage: tu uninstall <module>"
-    echo "Modules: shell python node ai media"
+    echo "Modules: shell python node ai media lazygit lang"
     exit 1
 fi
 
@@ -48,7 +48,7 @@ case "$MODULE" in
         rm -f "$HOME/.termux-ultimate/themes/"*.properties 2>/dev/null || true
         echo "  Theme files removed (your colors.properties was left alone)"
         echo "  Packages left installed. Remove them with:"
-        echo "  pkg uninstall zsh git curl wget nano vim openssh figlet neofetch fastfetch tmux btop htop eza bat fd ripgrep jq tldr"
+        echo "  pkg uninstall zsh git curl wget nano vim openssh figlet neofetch fastfetch tmux btop htop eza bat fd ripgrep jq tldr termux-api"
         ;;
 
     python)
@@ -74,9 +74,19 @@ case "$MODULE" in
         echo "✓ Media module removed (yt-dlp, ffmpeg)"
         ;;
 
+    lazygit)
+        pkg uninstall -y lazygit 2>/dev/null || true
+        echo "✓ Lazygit module removed"
+        ;;
+
+    lang)
+        pkg uninstall -y rust golang 2>/dev/null || true
+        echo "✓ Lang module removed (rust, golang)"
+        ;;
+
     *)
         echo "Unknown module: $MODULE"
-        echo "Modules: shell python node ai media"
+        echo "Modules: shell python node ai media lazygit lang"
         exit 1
         ;;
 

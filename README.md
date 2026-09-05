@@ -80,6 +80,12 @@ tu install media    # yt-dlp + FFmpeg
 
 Running `tu` with no arguments opens a friendly menu — pick an action with a number, install multiple modules, and press `0` to exit. Every module is idempotent — safe to run multiple times; already-installed tools are skipped.
 
+Nice extras:
+
+- **Tab completion** — type `tu <TAB>` to complete commands, and `tu install <TAB>` to complete modules.
+- **Update check** — `tu doctor` compares your local version against the latest release and tells you when to run `tu update`.
+- **`tu doctor` exit code** — exits non-zero when something is missing, so it can be used in scripts.
+
 ---
 
 ## Project Status

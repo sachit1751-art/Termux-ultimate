@@ -1,6 +1,16 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-ROOT="$(cd "$(dirname "$0")" && pwd)"
+# Resolve the real script path even when 'tu' is a symlink (e.g. $PREFIX/bin/tu)
+SCRIPT="$0"
+while [ -L "$SCRIPT" ]; do
+    DIR="$(cd -P "$(dirname "$SCRIPT")" && pwd)"
+    LINK="$(readlink "$SCRIPT")"
+    case "$LINK" in
+        /*) SCRIPT="$LINK" ;;
+        *) SCRIPT="$DIR/$LINK" ;;
+    esac
+done
+ROOT="$(cd -P "$(dirname "$SCRIPT")" && pwd)"
 VERSION="$(cat "$ROOT/VERSION" 2>/dev/null || echo "unknown")"
 
 MODULES="shell python node ai media"
@@ -108,7 +118,7 @@ menu() {
             2) run_repair ;;
             3) pick_module ;;
             4) run_update ;;
-            5) run_uninstall ;;
+            5) run_uninstall; break ;;
             6) echo "Termux Ultimate v$VERSION" ;;
             0 | "") break ;;
             *) echo "Invalid choice." ;;

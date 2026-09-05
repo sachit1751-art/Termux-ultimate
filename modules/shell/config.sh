@@ -135,6 +135,28 @@ if [ -f "$TU_CLI" ]; then
     } >> "$ZSHRC"
 fi
 
+# Tab completion for 'tu' (Oh My Zsh auto-loads custom/completions)
+if [ -d "$HOME/.oh-my-zsh/custom" ]; then
+    mkdir -p "$HOME/.oh-my-zsh/custom/completions"
+    cat > "$HOME/.oh-my-zsh/custom/completions/_tu" <<'EOF'
+#compdef tu
+_tu() {
+    if (( CURRENT == 2 )); then
+        _values 'command' doctor repair update uninstall version install help
+    elif (( CURRENT == 3 )); then
+        case $words[2] in
+            install) _values 'module' shell python node ai media ;;
+            *) _message 'no more arguments' ;;
+        esac
+    else
+        _message 'no more arguments'
+    fi
+}
+compdef _tu tu
+EOF
+    echo "✓ Added tab completion for 'tu'"
+fi
+
 # Install theme files and apply Catppuccin by default
 if [ -d "$MODULE_THEMES" ]; then
     mkdir -p "$THEME_DIR" "$HOME/.termux"

@@ -37,6 +37,17 @@ else
     FAILURES=$((FAILURES + 1))
 fi
 
+LOCAL_VERSION="$(cat "$(cd "$(dirname "$0")/.." && pwd)/VERSION" 2>/dev/null || echo 'unknown')"
+REMOTE_VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo '')"
+echo "  [INFO] local version: v$LOCAL_VERSION"
+if [ -n "$REMOTE_VERSION" ] && [ "$REMOTE_VERSION" != "$LOCAL_VERSION" ]; then
+    echo "  [UPDATE] v$REMOTE_VERSION is available - run 'tu update'"
+elif [ -n "$REMOTE_VERSION" ]; then
+    echo "  [OK] up to date"
+else
+    echo "  [?] could not check for updates"
+fi
+
 check "package manager (pkg)" "pkg"
 check "git" "git"
 
@@ -85,4 +96,7 @@ fi
 
 echo "Completed in $(($(date +%s) - START))s"
 
+if [ "$FAILURES" -gt 0 ]; then
+    exit 1
+fi
 exit 0

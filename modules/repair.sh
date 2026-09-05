@@ -63,4 +63,4 @@ echo
 echo "✓ Repair completed"
 echo "  elapsed: $(($(date +%s) - START))s"
 echo
-echo "Run './tu doctor' to verify everything."
+echo "Run './tu doctor' to verify everything."

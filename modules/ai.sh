@@ -49,4 +49,4 @@ echo "  elapsed: $(($(date +%s) - START))s"
 echo
 echo "Run local models:    ollama run <model>  (e.g. llama3.2)"
 echo "Use Gemini CLI:      gemini"
-echo "Note: Gemini CLI needs a Google API key on first run."
+echo "Note: Gemini CLI needs a Google API key on first run."

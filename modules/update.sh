@@ -32,4 +32,4 @@ fi
 
 echo
 echo "Run './tu doctor' to check your setup and './tu repair' to reinstall anything missing."
-echo "Completed in $(($(date +%s) - START))s"
+echo "Completed in $(($(date +%s) - START))s"

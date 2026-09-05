@@ -170,4 +170,4 @@ if [ -d "$MODULE_THEMES" ]; then
     echo "✓ Applied Catppuccin theme (switch with: theme tokyonight)"
 fi
 
-chsh -s zsh 2>/dev/null || true
+chsh -s zsh 2>/dev/null || true

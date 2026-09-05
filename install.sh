@@ -233,4 +233,4 @@ echo "  $INSTALL_DIR/tu install shell"
 echo "  $INSTALL_DIR/tu update"
 echo
 echo "Installation log:"
-echo "  $LOG_FILE"
+echo "  $LOG_FILE"

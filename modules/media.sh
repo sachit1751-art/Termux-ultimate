@@ -39,4 +39,4 @@ echo "  ffmpeg: $(ffmpeg -version 2>&1 | head -1)"
 echo "  elapsed: $(($(date +%s) - START))s"
 echo
 echo "Download a video:    yt-dlp <url>"
-echo "Convert a file:      ffmpeg -i input.mp4 output.mp3"
+echo "Convert a file:      ffmpeg -i input.mp4 output.mp3"

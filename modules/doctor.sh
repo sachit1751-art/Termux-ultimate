@@ -99,4 +99,4 @@ echo "Completed in $(($(date +%s) - START))s"
 if [ "$FAILURES" -gt 0 ]; then
     exit 1
 fi
-exit 0
+exit 0

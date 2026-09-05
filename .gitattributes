@@ -1,0 +1,9 @@
+# Termux runs bash on Linux - CRLF line endings break every script.
+# Force LF everywhere so clones and curl|bash always work.
+* text=auto
+
+*.sh text eol=lf
+*.md text eol=lf
+tu text eol=lf
+VERSION text eol=lf
+*.properties text eol=lf

@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Syntax check and shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+
+      - name: Syntax check and lint all scripts
+        run: |
+          set -e
+          for f in tu install.sh uninstall.sh modules/*.sh modules/shell/*.sh; do
+            echo "== $f =="
+            bash -n "$f"
+            shellcheck -s bash -S warning "$f"
+          done
+          echo "All scripts passed."

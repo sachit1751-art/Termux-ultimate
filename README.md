@@ -2,7 +2,7 @@
 
 > Transform Termux into a modern AI-powered development environment with a single command.
 
-![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue)
+![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![Platform](https://img.shields.io/badge/platform-Termux-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -22,10 +22,11 @@
 - 🐍 Python Development (pip, IPython)
 - 🟢 Node.js Development (npm, pnpm, Yarn)
 - 🎥 yt-dlp + FFmpeg
-- 🩺 `tu doctor` — health checks
+- 🩺 `tu doctor` — health checks + update check
 - 🛠 `tu repair` — self repair
 - 🔄 `tu update` — self update
-- 🗑 `tu uninstall` — clean removal
+- 🗑 `tu uninstall` — full or per-module removal
+- 💾 `tu backup` / `tu restore` — dotfile backup & restore
 
 ---
 
@@ -67,8 +68,11 @@ tu              # Interactive menu (no arguments needed)
 tu doctor       # Check your setup health
 tu repair       # Reinstall anything that is missing
 tu update       # Pull the latest version
-tu uninstall    # Remove the setup
-tu version      # Show the current version
+tu uninstall        # Remove the setup
+tu uninstall shell  # ...or just one module
+tu backup           # Back up your dotfiles
+tu restore <file>   # Restore from a backup
+tu version          # Show the current version
 
 tu install          # Module picker (interactive)
 tu install shell    # Or install a specific module
@@ -90,9 +94,9 @@ Nice extras:
 
 ## Project Status
 
-🚧 Under Active Development
+✅ First stable release (v0.1.0)
 
-Current Version: **0.1.0-alpha**
+Current Version: **0.1.0**
 
 ---
 
@@ -119,11 +123,18 @@ Current Version: **0.1.0-alpha**
 - tmux
 - Themes
 
+### v0.5 ✅
+- Interactive menu and tab completion
+- Backup & restore
+- Per-module uninstall
+- CI with syntax checks
+- LF line endings everywhere
+
 ### v1.0 🚧
-- Stable Release
-- One-command installer (works, pending polish)
-- Self-update
-- Self-repair
+- Stable Release (v0.1.0 shipped — v1.0 is the polished milestone)
+- One-command installer ✅
+- Self-update ✅
+- Self-repair ✅
 
 ---
 
@@ -133,4 +144,4 @@ MIT License
 
 ---
 
-Made with ❤️ by Sachitt
+Made with ❤️ by Sachitt

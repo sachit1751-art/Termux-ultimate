@@ -27,7 +27,9 @@ Usage:
   ./tu doctor                Check your setup health
   ./tu repair                Reinstall anything that is missing
   ./tu update                Pull the latest version
-  ./tu uninstall             Remove Termux Ultimate setup
+  ./tu uninstall [module]    Remove the setup (or one module)
+  ./tu backup                Back up your dotfiles
+  ./tu restore <file>        Restore from a backup
   ./tu version               Show version
 
 Modules:
@@ -108,7 +110,8 @@ menu() {
         echo "  3) Install   - add a module"
         echo "  4) Update    - pull the latest version"
         echo "  5) Uninstall - remove the setup"
-        echo "  6) Version"
+        echo "  6) Backup    - save your dotfiles"
+        echo "  7) Version"
         echo "  0) Exit"
         echo
         read -rp "> " choice
@@ -119,7 +122,8 @@ menu() {
             3) pick_module ;;
             4) run_update ;;
             5) run_uninstall; break ;;
-            6) echo "Termux Ultimate v$VERSION" ;;
+            6) bash "$ROOT/modules/backup.sh" backup ;;
+            7) echo "Termux Ultimate v$VERSION" ;;
             0 | "") break ;;
             *) echo "Invalid choice." ;;
         esac
@@ -156,7 +160,15 @@ case "$1" in
         ;;
 
     uninstall)
-        run_uninstall
+        if [ -n "$2" ]; then
+            bash "$ROOT/modules/uninstall.sh" "$2"
+        else
+            run_uninstall
+        fi
+        ;;
+
+    backup | restore)
+        bash "$ROOT/modules/backup.sh" "$1" "${2:-}"
         ;;
 
     install)

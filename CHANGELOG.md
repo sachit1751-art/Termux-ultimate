@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.1 — 2026-09-05
 
 ### Added
 - Dracula theme (`theme dracula`)
@@ -9,6 +9,11 @@
 - `uv` (fast Python package/venv manager) in the python module
 - Storage access setup (`termux-setup-storage`) in the installer
 - More git aliases: `gd`, `gpf`, `gundo`, `gclean`
+- Module descriptions in the install pickers
+- `AGENTS.md` guide for AI agents working on this repo
+
+### Fixed
+- Stale `0.1.0-alpha` fallback version in `install.sh`
 
 ## v0.1.0 — 2026-09-05
 

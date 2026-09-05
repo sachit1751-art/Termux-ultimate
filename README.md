@@ -2,7 +2,7 @@
 
 > Transform Termux into a modern AI-powered development environment with a single command.
 
-![Version](https://img.shields.io/badge/version-0.1.0-blue)
+![Version](https://img.shields.io/badge/version-0.1.1-blue)
 ![Platform](https://img.shields.io/badge/platform-Termux-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -95,9 +95,9 @@ Nice extras:
 
 ## Project Status
 
-✅ First stable release (v0.1.0)
+✅ First stable release (v0.1.0) + maintenance release (v0.1.1)
 
-Current Version: **0.1.0**
+Current Version: **0.1.1**
 
 ---
 

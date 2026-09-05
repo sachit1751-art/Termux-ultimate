@@ -57,6 +57,16 @@ show_logs() {
     fi
 }
 
+describe_module() {
+    case "$1" in
+        shell)  echo "Zsh + Oh My Zsh + Powerlevel10k + tools" ;;
+        python) echo "Python + pip + IPython + uv" ;;
+        node)   echo "Node.js + npm + pnpm + Yarn" ;;
+        ai)     echo "Ollama + Gemini CLI" ;;
+        media)  echo "yt-dlp + FFmpeg" ;;
+    esac
+}
+
 install_module() {
     local mod="$1"
     case " $MODULES " in
@@ -76,7 +86,7 @@ pick_module() {
         echo "Which module would you like to install?"
         i=1
         for m in $MODULES; do
-            echo "  $i) $m"
+            echo "  $i) $m - $(describe_module "$m")"
             i=$((i + 1))
         done
         echo "  all) install everything"

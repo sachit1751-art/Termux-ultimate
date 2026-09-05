@@ -8,9 +8,19 @@ INSTALL_DIR="$HOME/.termux-ultimate"
 LOG_DIR="$INSTALL_DIR/logs"
 LOG_FILE="$LOG_DIR/install.log"
 
-VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo "0.1.0-alpha")"
+VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo "0.1.1")"
 
 MODULES="shell python node ai media"
+
+describe_module() {
+    case "$1" in
+        shell)  echo "Zsh + Oh My Zsh + Powerlevel10k + tools" ;;
+        python) echo "Python + pip + IPython + uv" ;;
+        node)   echo "Node.js + npm + pnpm + Yarn" ;;
+        ai)     echo "Ollama + Gemini CLI" ;;
+        media)  echo "yt-dlp + FFmpeg" ;;
+    esac
+}
 
 RED="\033[31m"
 GREEN="\033[32m"
@@ -157,7 +167,7 @@ elif [ -t 0 ]; then
         echo "  0) none"
         i=1
         for mod in $MODULES; do
-            echo "  $i) $mod"
+            echo "  $i) $mod - $(describe_module "$mod")"
             i=$((i + 1))
         done
         read -rp "> " choice

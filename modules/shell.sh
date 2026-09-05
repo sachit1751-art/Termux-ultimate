@@ -21,6 +21,7 @@ fi
 bash "$MODULE_DIR/install.sh"
 bash "$MODULE_DIR/plugins.sh"
 bash "$MODULE_DIR/config.sh"
+bash "$MODULE_DIR/fastfetch.sh"
 bash "$MODULE_DIR/tmux.sh"
 bash "$MODULE_DIR/git.sh"
 
@@ -29,7 +30,8 @@ echo "✓ Shell setup completed"
 echo "  zsh + Oh My Zsh + Powerlevel10k"
 echo "  plugins: zsh-autosuggestions, zsh-syntax-highlighting"
 echo "  theme: Catppuccin (switch with 'theme tokyonight')"
-echo "  tmux config + git config + btop/htop"
+echo "  tmux config + git config + fastfetch"
+echo "  dev tools: eza, bat, fd, ripgrep + btop/htop"
 echo "  elapsed: $(($(date +%s) - START))s"
 echo
 echo "Restart Termux or run: zsh"

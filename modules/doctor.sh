@@ -47,6 +47,11 @@ check "Oh My Zsh" "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 check "Powerlevel10k" "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
 check "zsh-autosuggestions" "$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 check "zsh-syntax-highlighting" "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+check "fastfetch" "fastfetch"
+check "eza" "eza"
+check "bat" "bat"
+check "fd" "fd"
+check "ripgrep (rg)" "rg"
 
 echo
 echo "Python module:"

@@ -29,9 +29,6 @@ zsh-syntax-highlighting
 source $ZSH/oh-my-zsh.sh
 
 
-alias ll='ls -lah'
-alias l='ls -lh'
-alias la='ls -A'
 alias c='clear'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -40,11 +37,38 @@ alias md='mkdir -p'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias grep='grep --color=auto'
 alias py='python'
 alias srv='python -m http.server 8000'
 alias tf='tail -f'
 alias update='pkg update && pkg upgrade'
+
+
+# Modern tool replacements (\ls, \cat, \grep, \find bypass them)
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza --group-directories-first'
+    alias ll='eza -lah --group-directories-first'
+    alias l='eza -lh --group-directories-first'
+    alias la='eza -A'
+    alias tree='eza --tree'
+else
+    alias ll='ls -lah'
+    alias l='ls -lh'
+    alias la='ls -A'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat --paging=never'
+fi
+
+if command -v rg >/dev/null 2>&1; then
+    alias grep='rg --color=auto'
+else
+    alias grep='grep --color=auto'
+fi
+
+if command -v fd >/dev/null 2>&1; then
+    alias find='fd'
+fi
 
 
 export EDITOR=nano
@@ -64,7 +88,12 @@ greeting() {
 }
 
 greeting
-neofetch
+
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
+else
+    neofetch
+fi
 
 
 # Termux Ultimate theme switcher: theme catppuccin | tokyonight | default

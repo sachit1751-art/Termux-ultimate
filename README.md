@@ -15,6 +15,8 @@
 - 🖥️ tmux with a ready-made config
 - ⚙️ Git aliases and sane defaults
 - 📈 btop / htop
+- 🔍 Dev tools: eza, bat, fd, ripgrep (with aliases)
+- 📊 Fastfetch with a theme-aware config
 - 🤖 Ollama (local LLMs)
 - 🧠 Gemini CLI
 - 🐍 Python Development (pip, IPython)

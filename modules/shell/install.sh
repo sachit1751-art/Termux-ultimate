@@ -21,6 +21,10 @@ fastfetch
 tmux
 btop
 htop
+eza
+bat
+fd
+ripgrep
 "
 
 echo "[2/3] Installing packages..."

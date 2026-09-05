@@ -28,6 +28,11 @@ else
     echo "• Left your .zshrc untouched (no Termux Ultimate backup found)"
 fi
 
+if [ -e "$PREFIX/bin/tu" ]; then
+    rm -f "$PREFIX/bin/tu"
+    echo "✓ Removed 'tu' from PATH"
+fi
+
 if [ -f "$HOME/.tmux.conf.termux-ultimate-backup" ]; then
     mv "$HOME/.tmux.conf.termux-ultimate-backup" "$HOME/.tmux.conf"
     echo "✓ Restored your original .tmux.conf"

@@ -117,6 +117,14 @@ fi
 
 log "Repository ready at $INSTALL_DIR"
 
+# Make 'tu' available anywhere
+if [ -w "$PREFIX/bin" ]; then
+    ln -sf "$INSTALL_DIR/tu" "$PREFIX/bin/tu"
+    success "Added 'tu' to PATH"
+else
+    warn "Could not add 'tu' to PATH - use $INSTALL_DIR/tu"
+fi
+
 # --- Module selection -------------------------------------------------------
 
 selected=""

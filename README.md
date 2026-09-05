@@ -60,23 +60,25 @@ Running the installer again updates an existing install in place (no duplicate c
 
 ## Usage
 
-After bootstrapping, clone this repo and use the `tu` CLI:
+The installer puts `tu` on your PATH, so just type `tu` anywhere:
 
 ```bash
-./tu install shell    # Zsh + Oh My Zsh + Powerlevel10k
-./tu install python   # Python, pip, IPython
-./tu install node     # Node.js, pnpm, Yarn
-./tu install ai       # Ollama + Gemini CLI
-./tu install media    # yt-dlp + FFmpeg
+tu              # Interactive menu (no arguments needed)
+tu doctor       # Check your setup health
+tu repair       # Reinstall anything that is missing
+tu update       # Pull the latest version
+tu uninstall    # Remove the setup
+tu version      # Show the current version
 
-./tu doctor           # Check your setup health
-./tu repair           # Reinstall anything that is missing
-./tu update           # Pull the latest version
-./tu uninstall        # Remove the setup
-./tu version          # Show the current version
+tu install          # Module picker (interactive)
+tu install shell    # Or install a specific module
+tu install python   # Python, pip, IPython
+tu install node     # Node.js, pnpm, Yarn
+tu install ai       # Ollama + Gemini CLI
+tu install media    # yt-dlp + FFmpeg
 ```
 
-Every module is idempotent — safe to run multiple times; already-installed tools are skipped.
+Running `tu` with no arguments opens a friendly menu — pick an action with a number, install multiple modules, and press `0` to exit. Every module is idempotent — safe to run multiple times; already-installed tools are skipped.
 
 ---
 

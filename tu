@@ -3,17 +3,22 @@
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 VERSION="$(cat "$ROOT/VERSION" 2>/dev/null || echo "unknown")"
 
+MODULES="shell python node ai media"
+
 show_help() {
 cat << EOF
 Termux Ultimate v$VERSION
 
+Run ./tu with no arguments for the interactive menu.
+
 Usage:
-  ./tu install <module>   Install a module
-  ./tu doctor             Check your setup health
-  ./tu repair             Reinstall anything that is missing
-  ./tu update             Pull the latest version
-  ./tu uninstall          Remove Termux Ultimate setup
-  ./tu version            Show version
+  ./tu                       Interactive menu
+  ./tu install <module>      Install a module
+  ./tu doctor                Check your setup health
+  ./tu repair                Reinstall anything that is missing
+  ./tu update                Pull the latest version
+  ./tu uninstall             Remove Termux Ultimate setup
+  ./tu version               Show version
 
 Modules:
   shell    Zsh + Oh My Zsh + Powerlevel10k
@@ -24,53 +29,142 @@ Modules:
 EOF
 }
 
+run_doctor()    { bash "$ROOT/modules/doctor.sh"; }
+run_repair()    { bash "$ROOT/modules/repair.sh"; }
+run_update()    { bash "$ROOT/modules/update.sh"; }
+run_uninstall() { bash "$ROOT/uninstall.sh"; }
+
+install_module() {
+    local mod="$1"
+    case " $MODULES " in
+        *" $mod "*)
+            bash "$ROOT/modules/$mod.sh"
+            ;;
+        *)
+            echo "Unknown module: $mod"
+            show_help
+            ;;
+    esac
+}
+
+pick_module() {
+    while true; do
+        echo
+        echo "Which module would you like to install?"
+        i=1
+        for m in $MODULES; do
+            echo "  $i) $m"
+            i=$((i + 1))
+        done
+        echo "  all) install everything"
+        echo "  0) back to menu"
+        read -rp "> " choice
+
+        case "$choice" in
+            "" | 0) return ;;
+            all)
+                for m in $MODULES; do
+                    install_module "$m"
+                done
+                return
+                ;;
+            *)
+                case "$choice" in
+                    *[!0-9]*)
+                        echo "Invalid choice."
+                        ;;
+                    *)
+                        if [ "$choice" -ge 1 ] && [ "$choice" -le 5 ]; then
+                            install_module "$(echo "$MODULES" | cut -d' ' -f"$choice")"
+                        else
+                            echo "Invalid choice."
+                        fi
+                        ;;
+                esac
+                ;;
+        esac
+    done
+}
+
+menu() {
+    while true; do
+        clear
+        echo "==========================================="
+        echo "        🚀 Termux Ultimate v$VERSION"
+        echo "==========================================="
+        echo
+        echo "  1) Doctor    - check your setup"
+        echo "  2) Repair    - fix missing components"
+        echo "  3) Install   - add a module"
+        echo "  4) Update    - pull the latest version"
+        echo "  5) Uninstall - remove the setup"
+        echo "  6) Version"
+        echo "  0) Exit"
+        echo
+        read -rp "> " choice
+
+        case "$choice" in
+            1) run_doctor ;;
+            2) run_repair ;;
+            3) pick_module ;;
+            4) run_update ;;
+            5) run_uninstall ;;
+            6) echo "Termux Ultimate v$VERSION" ;;
+            0 | "") break ;;
+            *) echo "Invalid choice." ;;
+        esac
+
+        echo
+        read -rp "Press Enter to continue..." _ || true
+    done
+}
+
 case "$1" in
 
-  version)
-    echo "Termux Ultimate v$VERSION"
-    ;;
-
-  doctor)
-    bash "$ROOT/modules/doctor.sh"
-    ;;
-
-  repair)
-    bash "$ROOT/modules/repair.sh"
-    ;;
-
-  update)
-    bash "$ROOT/modules/update.sh"
-    ;;
-
-  uninstall)
-    bash "$ROOT/uninstall.sh"
-    ;;
-
-  install)
-    case "$2" in
-      shell)
-        bash "$ROOT/modules/shell.sh"
+    "" | menu)
+        if [ -t 0 ]; then
+            menu
+        else
+            show_help
+        fi
         ;;
-      python)
-        bash "$ROOT/modules/python.sh"
+
+    version)
+        echo "Termux Ultimate v$VERSION"
         ;;
-      node)
-        bash "$ROOT/modules/node.sh"
+
+    doctor)
+        run_doctor
         ;;
-      ai)
-        bash "$ROOT/modules/ai.sh"
+
+    repair)
+        run_repair
         ;;
-      media)
-        bash "$ROOT/modules/media.sh"
+
+    update)
+        run_update
         ;;
-      *)
+
+    uninstall)
+        run_uninstall
+        ;;
+
+    install)
+        if [ -n "$2" ]; then
+            install_module "$2"
+        elif [ -t 0 ]; then
+            pick_module
+        else
+            show_help
+        fi
+        ;;
+
+    help | -h | --help)
         show_help
         ;;
-    esac
-    ;;
 
-  *)
-    show_help
-    ;;
+    *)
+        show_help
+        ;;
 
-esac
+esac

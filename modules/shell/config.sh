@@ -70,6 +70,10 @@ if command -v fd >/dev/null 2>&1; then
     alias find='fd'
 fi
 
+if command -v termux-open-url >/dev/null 2>&1; then
+    alias open='termux-open-url'
+fi
+
 
 export EDITOR=nano
 

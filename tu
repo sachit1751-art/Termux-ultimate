@@ -31,6 +31,7 @@ Usage:
   ./tu backup                Back up your dotfiles
   ./tu restore <file>        Restore from a backup
   ./tu logs                  View the install log
+  ./tu env                   Show environment summary
   ./tu version               Show version
 
 Modules:
@@ -196,6 +197,17 @@ case "$1" in
 
     logs)
         show_logs
+        ;;
+
+    env)
+        echo "Termux Ultimate environment"
+        echo "  version:  v$VERSION"
+        echo "  root:     $ROOT"
+        echo "  prefix:   ${PREFIX:-not set}"
+        echo "  home:     $HOME"
+        echo "  shell:    ${SHELL:-unknown}"
+        UP="$(uptime 2>/dev/null || true)"
+        echo "  uptime:   ${UP:-n/a}"
         ;;
 
     install)

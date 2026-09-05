@@ -25,6 +25,8 @@ eza
 bat
 fd
 ripgrep
+jq
+tldr
 "
 
 echo "[2/3] Installing packages..."

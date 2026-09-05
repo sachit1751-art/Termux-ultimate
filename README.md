@@ -2,7 +2,7 @@
 
 > Transform Termux into a modern AI-powered development environment with a single command.
 
-![Version](https://img.shields.io/badge/version-0.1.1-blue)
+![Version](https://img.shields.io/badge/version-0.1.2-blue)
 ![Platform](https://img.shields.io/badge/platform-Termux-green)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 
@@ -15,7 +15,7 @@
 - 🖥️ tmux with a ready-made config
 - ⚙️ Git aliases and sane defaults
 - 📈 btop / htop
-- 🔍 Dev tools: eza, bat, fd, ripgrep (with aliases)
+- 🔍 Dev tools: eza, bat, fd, ripgrep, jq, tldr (with aliases)
 - 📊 Fastfetch with a theme-aware config
 - 🤖 Ollama (local LLMs)
 - 🧠 Gemini CLI
@@ -95,9 +95,9 @@ Nice extras:
 
 ## Project Status
 
-✅ First stable release (v0.1.0) + maintenance release (v0.1.1)
+✅ First stable release (v0.1.0) + maintenance releases (v0.1.1, v0.1.2)
 
-Current Version: **0.1.1**
+Current Version: **0.1.2**
 
 ---
 

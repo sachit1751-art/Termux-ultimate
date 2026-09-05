@@ -48,7 +48,7 @@ case "$MODULE" in
         rm -f "$HOME/.termux-ultimate/themes/"*.properties 2>/dev/null || true
         echo "  Theme files removed (your colors.properties was left alone)"
         echo "  Packages left installed. Remove them with:"
-        echo "  pkg uninstall zsh git curl wget nano vim openssh figlet neofetch fastfetch tmux btop htop eza bat fd ripgrep"
+        echo "  pkg uninstall zsh git curl wget nano vim openssh figlet neofetch fastfetch tmux btop htop eza bat fd ripgrep jq tldr"
         ;;
 
     python)

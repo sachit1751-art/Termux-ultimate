@@ -31,7 +31,7 @@ echo "  zsh + Oh My Zsh + Powerlevel10k"
 echo "  plugins: zsh-autosuggestions, zsh-syntax-highlighting"
 echo "  theme: Catppuccin (switch with 'theme tokyonight')"
 echo "  tmux config + git config + fastfetch"
-echo "  dev tools: eza, bat, fd, ripgrep + btop/htop"
+echo "  dev tools: eza, bat, fd, ripgrep, jq, tldr + btop/htop"
 echo "  elapsed: $(($(date +%s) - START))s"
 echo
 echo "Restart Termux or run: zsh"

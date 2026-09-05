@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.1.2 — 2026-09-05
+
+### Added
+- `tu doctor` now suggests exact fixes for missing items (e.g. `tu install shell`)
+- `tu env` prints a compact environment summary (version, prefix, home, uptime)
+- `open` alias for `termux-open-url` (open links in the Android browser)
+- `jq` and `tldr` tools in the shell module
+
+### Fixed
+- Doctor suggestions now survive word-splitting (uses bash arrays)
+
 ## v0.1.1 — 2026-09-05
 
 ### Added

@@ -30,13 +30,41 @@ source $ZSH/oh-my-zsh.sh
 
 
 alias ll='ls -lah'
+alias l='ls -lh'
+alias la='ls -A'
 alias c='clear'
 alias ..='cd ..'
+alias ...='cd ../..'
 alias home='cd ~'
+alias md='mkdir -p'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias grep='grep --color=auto'
+alias py='python'
+alias srv='python -m http.server 8000'
+alias tf='tail -f'
 alias update='pkg update && pkg upgrade'
 
 
 export EDITOR=nano
+
+
+# Termux Ultimate greeting
+greeting() {
+    if command -v figlet >/dev/null 2>&1; then
+        figlet -f slant "Termux Ultimate"
+    else
+        echo "🚀 Termux Ultimate"
+    fi
+    echo
+    echo "  Welcome back, ${USER:-$(whoami)}! It's $(date '+%A, %d %B %Y')."
+    echo "  Tip: run 'tu doctor' to check your setup, 'theme' to switch colors."
+    echo
+}
+
+greeting
+neofetch
 
 
 # Termux Ultimate theme switcher: theme catppuccin | tokyonight | default
@@ -64,12 +92,19 @@ theme() {
     esac
 }
 
-
-neofetch
-
 EOF
 
 echo "✓ .zshrc configured"
+
+# Point 'tu' at this copy of Termux Ultimate
+TU_CLI="$(cd "$(dirname "$0")/../.." && pwd)/tu"
+if [ -f "$TU_CLI" ]; then
+    {
+        echo ""
+        echo "# Point 'tu' at this copy of Termux Ultimate"
+        echo "alias tu='$TU_CLI'"
+    } >> "$ZSHRC"
+fi
 
 # Install theme files and apply Catppuccin by default
 if [ -d "$MODULE_THEMES" ]; then

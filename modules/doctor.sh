@@ -3,6 +3,66 @@
 # Termux Ultimate - Doctor Module
 # Checks that the environment and each module are healthy
 
+JSON_MODE=0
+if [ "${1:-}" = "--json" ]; then
+    JSON_MODE=1
+fi
+
+json_escape() {
+    printf '%s' "$1" | sed 's/\\/\\\\/g; s/"/\\"/g'
+}
+
+doctor_json() {
+    local checks=""
+    local failures=0
+    local local_version
+    local remote_version
+
+    add_json_check() {
+        local label="$1"
+        local ok="$2"
+        [ -n "$checks" ] && checks="$checks,"
+        checks="$checks{\"name\":\"$(json_escape "$label")\",\"ok\":$ok}"
+        [ "$ok" = true ] || failures=$((failures + 1))
+    }
+
+    if [ -n "${PREFIX:-}" ]; then
+        add_json_check "Termux" true
+    else
+        add_json_check "Termux" false
+    fi
+    if ping -c 1 github.com >/dev/null 2>&1; then
+        add_json_check "Internet connection" true
+    else
+        add_json_check "Internet connection" false
+    fi
+
+    local_version="$(cat "$(cd "$(dirname "$0")/.." && pwd)/VERSION" 2>/dev/null || echo unknown)"
+    remote_version="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || true)"
+    add_json_check "package manager (pkg)" "$(command -v pkg >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "git" "$(command -v git >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "zsh" "$(command -v zsh >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "Oh My Zsh" "$([ -e "$HOME/.oh-my-zsh/oh-my-zsh.sh" ] && echo true || echo false)"
+    add_json_check "python" "$(command -v python >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "node" "$(command -v node >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "ollama" "$(command -v ollama >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "gemini" "$(command -v gemini >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "yt-dlp" "$(command -v yt-dlp >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "ffmpeg" "$(command -v ffmpeg >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "lazygit" "$(command -v lazygit >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "rustc" "$(command -v rustc >/dev/null 2>&1 && echo true || echo false)"
+    add_json_check "go" "$(command -v go >/dev/null 2>&1 && echo true || echo false)"
+
+    printf '{"local_version":"%s","remote_version":"%s","failures":%s,"checks":[%s]}\n' \
+        "$(json_escape "$local_version")" "$(json_escape "$remote_version")" "$failures" "$checks"
+    [ "$failures" -eq 0 ]
+}
+
+if [ "$JSON_MODE" -eq 1 ]; then
+    doctor_json
+    exit $?
+fi
+
 FAILURES=0
 SUGGESTIONS=()
 
@@ -107,6 +167,13 @@ echo "Lang module:"
 check "rustc" "rustc" "tu install lang"
 check "cargo" "cargo" "tu install lang"
 check "go" "go" "tu install lang"
+
+echo
+echo "Dev tools module:"
+check "clang" "clang" "tu install dev"
+check "cmake" "cmake" "tu install dev"
+check "make" "make" "tu install dev"
+check "pkg-config" "pkg-config" "tu install dev"
 
 echo
 if [ "$FAILURES" -eq 0 ]; then

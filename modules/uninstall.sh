@@ -7,6 +7,12 @@
 set -e
 
 MODULE="${1:-}"
+DRY_RUN=0
+
+if [ "$MODULE" = "--dry-run" ]; then
+    DRY_RUN=1
+    MODULE="${2:-}"
+fi
 
 if [ -z "$PREFIX" ]; then
     echo "Error: This does not look like Termux."
@@ -14,9 +20,23 @@ if [ -z "$PREFIX" ]; then
 fi
 
 if [ -z "$MODULE" ]; then
-    echo "Usage: tu uninstall <module>"
-    echo "Modules: shell python node ai media lazygit lang"
+    echo "Usage: tu uninstall [--dry-run] <module>"
+    echo "Modules: shell python node ai media lazygit lang dev"
     exit 1
+fi
+
+if [ "$DRY_RUN" -eq 1 ]; then
+    case "$MODULE" in
+        shell|python|node|ai|media|lazygit|lang)
+            echo "[DRY RUN] would uninstall module: $MODULE"
+            echo "Packages and generated configuration would be changed."
+            exit 0
+            ;;
+        *)
+            echo "Unknown module: $MODULE" >&2
+            exit 2
+            ;;
+    esac
 fi
 
 echo "================================="
@@ -84,9 +104,14 @@ case "$MODULE" in
         echo "✓ Lang module removed (rust, golang)"
         ;;
 
+    dev)
+        pkg uninstall -y clang cmake make pkg-config 2>/dev/null || true
+        echo "✓ Dev tools module removed (clang, cmake, make, pkg-config)"
+        ;;
+
     *)
         echo "Unknown module: $MODULE"
-        echo "Modules: shell python node ai media lazygit lang"
+        echo "Modules: shell python node ai media lazygit lang dev"
         exit 1
         ;;
 

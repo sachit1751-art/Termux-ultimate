@@ -33,6 +33,10 @@ Check the box when it passes.
 - [ ] `tu uninstall media` removes them again (`tu doctor` no longer lists yt-dlp/ffmpeg).
 - [ ] `tu install` (no module) opens the module picker; pick `all` — everything
       installs.
+- [ ] `tu install all` installs every module without opening the picker.
+- [ ] `tu install shell,node` installs both requested modules.
+- [ ] `tu self-test` runs the local regression checks and exits successfully.
+- [ ] An unknown command or module prints help and exits non-zero.
 
 ## 4. Shell experience
 
@@ -72,6 +76,40 @@ Check the box when it passes.
 
 - [ ] `file ~/.termux-ultimate/tu` reports "ASCII text" — NOT "with CRLF line terminators".
 - [ ] `curl -fsSL <install.sh URL> | head -c 100 | od -c | head` shows `\n` only — no `\r`.
+
+## 9. Automated regression checks
+
+- [ ] From the repository root, run `bash tests/test.sh` and confirm it prints
+      `PASS: production hardening regression checks`.
+- [ ] Run `bash -n` and ShellCheck on every script, matching the CI workflow.
+- [ ] Simulate a failed selected module and confirm the installer exits with
+      status `1` while still attempting later selected modules.
+- [ ] Try restoring a backup containing an absolute path or `../` entry and
+      confirm it is rejected before extraction.
+- [ ] `tu doctor --json` prints valid JSON with `local_version`, `failures`, and
+      a `checks` array.
+- [ ] `tu install --dry-run all` prints planned installs without running a
+      module script.
+- [ ] `tu uninstall --dry-run shell` prints the planned removal without
+      changing files or packages.
+- [ ] `tu backup --list` lists archives without creating a new backup.
+- [ ] `tu update --check` checks the remote version without pulling changes.
+- [ ] `tu status` reports each module as installed or missing.
+- [ ] `tu version --full` prints repository branch, commit, and update date.
+- [ ] After shell setup, `tu <TAB>` completes new commands and
+      `tu install --dry-run <TAB>` completes flags and module names.
+- [ ] `tu doctor --quiet` preserves the doctor exit status without normal output.
+- [ ] `tu logs --tail 10` prints only the requested number of log lines.
+- [ ] `tu backup --list --json` prints valid JSON with a `backups` array.
+- [ ] `tu update` refuses to run when the repository remote is unexpected or
+      local changes are present.
+- [ ] Force a module failure, then run `install.sh --retry-failed` and confirm
+      only failed modules are retried.
+- [ ] `tu project init ~/tmp/example` creates README, `.gitignore`, and Git
+      metadata in an empty directory.
+- [ ] `tu status --json` and `tu version --json` each emit one JSON object.
+- [ ] `tu install dev` installs `clang`, `cmake`, `make`, and `pkg-config`.
+- [ ] Removing a dev tool and running `tu repair` reinstalls the dev module.
 
 ---
 

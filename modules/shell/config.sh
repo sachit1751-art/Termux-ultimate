@@ -146,10 +146,25 @@ if [ -d "$HOME/.oh-my-zsh/custom" ]; then
 #compdef tu
 _tu() {
     if (( CURRENT == 2 )); then
-        _values 'command' doctor repair update uninstall version install help
+        _values 'command' doctor repair update upgrade uninstall version status project install backup restore logs env self-test help
     elif (( CURRENT == 3 )); then
         case $words[2] in
-            install) _values 'module' shell python node ai media ;;
+            doctor) _values 'format' --json --quiet ;;
+            update) _values 'option' --check ;;
+            version) _values 'format' --full --json ;;
+            status) _values 'format' --json ;;
+            project) _values 'action' init ;;
+            install) _values 'option' --dry-run all shell python node ai media lazygit lang dev ;;
+            uninstall) _values 'option' --dry-run shell python node ai media lazygit lang dev ;;
+            backup) _values 'option' --list --json ;;
+            logs) _values 'option' --tail ;;
+            *) _message 'no more arguments' ;;
+        esac
+    elif (( CURRENT == 4 )); then
+        case $words[2] in
+            project) _values 'directory' ;;
+            install) _values 'module' all shell python node ai media lazygit lang dev ;;
+            uninstall) _values 'module' shell python node ai media lazygit lang dev ;;
             *) _message 'no more arguments' ;;
         esac
     else

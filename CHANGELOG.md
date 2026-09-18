@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- Shared module metadata used by both the installer and `tu` CLI.
+- Dependency-free regression checks included in CI.
+- `tu install all`, comma-separated module installs, and `tu self-test`.
+- `tu doctor --json`, install/uninstall dry runs, and `tu backup --list`.
+- `tu update --check`, `tu status`, full version details, and expanded completion.
+- Quiet doctor checks, configurable log tails, and JSON backup inventory.
+- Secure update preflight, resumable installs, project scaffolding, and JSON status/version output.
+- Native developer-tools module with Clang, CMake, Make, and pkg-config.
+
+### Fixed
+- Installer exits non-zero and reports failed modules when a selected module cannot be installed.
+- Restore rejects invalid archives and path traversal before extracting into `$HOME`.
+- Module picker bounds are computed from the module list instead of hard-coded.
+- Invalid CLI commands and module names now return non-zero status.
+- Restore and destructive module actions are easier to inspect before execution.
+
 ## v0.1.3 — 2026-09-05
 
 ### Added

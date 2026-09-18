@@ -18,9 +18,15 @@ jobs:
       - name: Syntax check and lint all scripts
         run: |
           set -e
-          for f in tu install.sh uninstall.sh modules/*.sh modules/shell/*.sh; do
+          git diff --check
+          if git grep -Il $'\r' -- '*.sh' '*.conf' '*.yml'; then
+            echo "CRLF line endings detected"
+            exit 1
+          fi
+          for f in tu install.sh uninstall.sh tests/*.sh modules/*.sh modules/shell/*.sh; do
             echo "== $f =="
             bash -n "$f"
             shellcheck -s bash -S warning "$f"
           done
+          bash tests/test.sh
           echo "All scripts passed."

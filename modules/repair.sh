@@ -73,6 +73,13 @@ else
     echo "✓ Lang toolchains OK"
 fi
 
+if missing clang || missing cmake || missing make || missing pkg-config; then
+    echo "! Native developer tools missing, reinstalling..."
+    bash "$ROOT/modules/dev.sh"
+else
+    echo "✓ Dev tools OK"
+fi
+
 echo
 echo "✓ Repair completed"
 echo "  elapsed: $(($(date +%s) - START))s"

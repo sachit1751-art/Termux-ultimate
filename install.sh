@@ -7,22 +7,9 @@ REPO_URL="https://github.com/sachit1751-art/Termux-ultimate.git"
 INSTALL_DIR="$HOME/.termux-ultimate"
 LOG_DIR="$INSTALL_DIR/logs"
 LOG_FILE="$LOG_DIR/install.log"
+FAILED_STATE="$INSTALL_DIR/.failed-modules"
 
 VERSION="$(curl -fsSL https://raw.githubusercontent.com/sachit1751-art/Termux-ultimate/main/VERSION 2>/dev/null || echo "0.1.3")"
-
-MODULES="shell python node ai media lazygit lang"
-
-describe_module() {
-    case "$1" in
-        shell)  echo "Zsh + Oh My Zsh + Powerlevel10k + tools" ;;
-        python) echo "Python + pip + IPython + uv" ;;
-        node)   echo "Node.js + npm + pnpm + Yarn" ;;
-        ai)     echo "Ollama + Gemini CLI" ;;
-        media)  echo "yt-dlp + FFmpeg" ;;
-        lazygit) echo "Lazygit - terminal UI for git" ;;
-        lang)   echo "Rust + Go toolchains" ;;
-    esac
-}
 
 RED="\033[31m"
 GREEN="\033[32m"
@@ -128,6 +115,10 @@ fi
 
 log "Repository ready at $INSTALL_DIR"
 
+# shellcheck source=modules/modules.conf
+. "$INSTALL_DIR/modules/modules.conf"
+MODULE_COUNT="$(module_count)"
+
 # Make 'tu' available anywhere
 if [ -w "$PREFIX/bin" ]; then
     ln -sf "$INSTALL_DIR/tu" "$PREFIX/bin/tu"
@@ -149,7 +140,14 @@ fi
 
 selected=""
 
-if [ $# -gt 0 ]; then
+if [ "${1:-}" = "--retry-failed" ]; then
+    if [ -s "$FAILED_STATE" ]; then
+        selected="$(tr '\n' ' ' < "$FAILED_STATE")"
+        print "Retrying previously failed modules:$selected"
+    else
+        warn "No failed module state found."
+    fi
+elif [ $# -gt 0 ]; then
     # Modules passed as arguments: install.sh shell python
     for mod in "$@"; do
         case " $MODULES " in
@@ -194,7 +192,7 @@ elif [ -t 0 ]; then
                     valid=0
                     ;;
                 *)
-                    if [ "$part" -ge 1 ] && [ "$part" -le 7 ]; then
+                    if [ "$part" -ge 1 ] && [ "$part" -le "$MODULE_COUNT" ]; then
                         mod="$(echo "$MODULES" | cut -d' ' -f"$part")"
                         case " $new_selected " in
                             *" $mod "*) ;;
@@ -224,6 +222,9 @@ fi
 
 # --- Install selected modules -----------------------------------------------
 
+INSTALL_FAILURES=0
+FAILED_MODULES=""
+
 if [ -n "$selected" ]; then
     echo
     print "Installing modules:$selected"
@@ -234,12 +235,24 @@ if [ -n "$selected" ]; then
             success "Module '$mod' installed"
         else
             error "Module '$mod' failed"
+            INSTALL_FAILURES=$((INSTALL_FAILURES + 1))
+            FAILED_MODULES="$FAILED_MODULES $mod"
         fi
     done
 else
     echo
     warn "No modules selected."
 fi
+
+if [ "$INSTALL_FAILURES" -gt 0 ]; then
+    IFS=' ' read -ra failed_module_list <<< "$FAILED_MODULES"
+    printf '%s\n' "${failed_module_list[@]}" > "$FAILED_STATE"
+    error "$INSTALL_FAILURES module(s) failed:$FAILED_MODULES"
+    echo "Review the log for details: $LOG_FILE"
+    exit 1
+fi
+
+rm -f "$FAILED_STATE"
 
 echo
 success "Setup completed."
